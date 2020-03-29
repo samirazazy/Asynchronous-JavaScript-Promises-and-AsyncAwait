@@ -24,12 +24,22 @@ fetDogPic = async () => {
     const data = await readFilePro(`${__dirname}/dog.txt`);
     console.log(`bread: ${data}`);
 
-    const res = await superagent.get(
+    const img1 = superagent.get(
       `https://dog.ceo/api/breed/${data}/images/random`
     );
-    console.log(res.body.message);
+    const img2 = superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
+    const img3 = superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
+    const all = await Promise.all([img1, img2, img3]);
+    const imgs = all.map(el => el.body.message);
 
-    await writeFilePro('img-dog.txt', res.body.message);
+    console.log(imgs);
+
+    await writeFilePro('img-dog.txt', imgs.join('\n'));
+    console.log('random dog image saved corectly ....');
   } catch (err) {
     console.log(err.message);
   }
