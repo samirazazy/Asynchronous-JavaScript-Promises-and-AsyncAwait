@@ -11,7 +11,7 @@ fs.readFile(`${__dirname}/dog.txt`, (err, data) => {
 
       fs.writeFile('img-dog.txt', res.body.message, err => {
         if (err) return console.log(err);
-        console.log('random dog image saved ....');
+        console.log('random dog image saved corectly ....');
       });
     })
     .catch(err => console.log(err.message));
